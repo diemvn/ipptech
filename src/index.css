@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-wine: #7f1b2c;
+  --color-wine-dark: #5a131f;
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-zinc-50 text-zinc-900 antialiased selection:bg-wine selection:text-white;
+  }
+
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+}
+
+.glass-card {
+  @apply bg-white border border-zinc-200 shadow-sm rounded-2xl overflow-hidden;
+}
+
+.glass-card-hover {
+  @apply hover:shadow-xl hover:shadow-zinc-200/50 transition-all duration-300;
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-br from-zinc-900 to-zinc-500;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-zinc-100;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-wine rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-wine-dark;
+}

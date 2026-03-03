@@ -1,90 +1,91 @@
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone } from 'lucide-react';
 
 export default function Contact() {
   return (
-    <section className="py-32 bg-white">
-      <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-20 items-start">
-          <div>
-            <h2 className="text-4xl lg:text-5xl font-bold mb-8 text-zinc-900 tracking-tight">Sẵn sàng cho kỷ nguyên mới?</h2>
-            <p className="text-xl text-zinc-600 mb-16 leading-relaxed">
-              Hãy để IPPTECH đồng hành cùng bạn trong việc tích hợp công nghệ Robotics 
-              vào quy trình vận hành của bạn. Chúng tôi cam kết mang lại giải pháp tối ưu nhất.
+    <section id="contact" className="bg-zinc-50 py-32">
+      <div className="section-padding">
+        <div className="bg-white rounded-[40px] overflow-hidden grid lg:grid-cols-2 shadow-2xl border border-zinc-100">
+          {/* Left Side - Info */}
+          <div className="p-12 lg:p-20 bg-wine flex flex-col justify-center">
+            <h3 className="text-4xl font-bold mb-6 text-white uppercase tracking-tight">
+              KẾT NỐI VỚI TƯƠNG LAI
+            </h3>
+            <p className="text-white/80 mb-16 text-lg leading-relaxed max-w-md">
+              Bạn sẵn sàng cho cuộc cách mạng Humanoid? Hãy để đội ngũ chuyên gia của IPPTech đồng hành cùng bạn.
             </p>
-
-            <div className="space-y-8">
-              <div className="flex items-center gap-6">
-                <div className="w-14 h-14 rounded-2xl bg-wine/5 flex items-center justify-center text-wine border border-wine/10">
-                  <Mail className="w-7 h-7" />
+            
+            <div className="space-y-10">
+              <div className="flex items-center gap-5">
+                <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-white">
+                  <Mail size={20} />
                 </div>
                 <div>
-                  <div className="text-xs text-zinc-400 uppercase tracking-widest font-bold mb-1">Email</div>
-                  <div className="text-lg font-semibold text-zinc-900">contact@ipptech.vn</div>
+                  <div className="text-[10px] text-white/50 font-bold uppercase tracking-[0.2em] mb-1">Email</div>
+                  <div className="font-bold text-xl text-white">contact@ipptech.vn</div>
                 </div>
               </div>
-              <div className="flex items-center gap-6">
-                <div className="w-14 h-14 rounded-2xl bg-wine/5 flex items-center justify-center text-wine border border-wine/10">
-                  <Phone className="w-7 h-7" />
+              
+              <div className="flex items-center gap-5">
+                <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-white">
+                  <Phone size={20} />
                 </div>
                 <div>
-                  <div className="text-xs text-zinc-400 uppercase tracking-widest font-bold mb-1">Hotline</div>
-                  <div className="text-lg font-semibold text-zinc-900">+84 900 123 456</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-6">
-                <div className="w-14 h-14 rounded-2xl bg-wine/5 flex items-center justify-center text-wine border border-wine/10">
-                  <MapPin className="w-7 h-7" />
-                </div>
-                <div>
-                  <div className="text-xs text-zinc-400 uppercase tracking-widest font-bold mb-1">Địa chỉ</div>
-                  <div className="text-lg font-semibold text-zinc-900">Khu Công nghệ cao, TP. Thủ Đức, TP. HCM</div>
+                  <div className="text-[10px] text-white/50 font-bold uppercase tracking-[0.2em] mb-1">Hotline</div>
+                  <div className="font-bold text-xl text-white">+84 123 456 789</div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="glass-card p-10 lg:p-12 shadow-2xl border-zinc-100">
-            <h3 className="text-3xl font-bold mb-10 text-zinc-900">Đặt lịch Demo</h3>
-            <form className="space-y-8">
+          {/* Right Side - Form */}
+          <div className="p-12 lg:p-20 bg-white">
+            <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
               <div className="grid md:grid-cols-2 gap-8">
-                <div>
-                  <label className="block text-sm font-bold text-zinc-500 mb-3 uppercase tracking-wider">Họ tên</label>
+                <div className="space-y-3">
+                  <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em]">Họ và tên</label>
                   <input 
                     type="text" 
-                    className="w-full bg-zinc-50 border border-zinc-200 rounded-2xl px-5 py-4 focus:outline-none focus:border-wine transition-colors text-zinc-900 font-medium"
-                    placeholder="Nguyễn Văn A"
+                    className="w-full bg-zinc-100 px-6 py-4 rounded-2xl border-none focus:ring-2 focus:ring-wine/20 outline-none transition-all text-zinc-900 placeholder:text-zinc-400" 
+                    placeholder="Nguyễn Văn A" 
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-bold text-zinc-500 mb-3 uppercase tracking-wider">Tổ chức</label>
+                <div className="space-y-3">
+                  <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em]">Số điện thoại</label>
                   <input 
-                    type="text" 
-                    className="w-full bg-zinc-50 border border-zinc-200 rounded-2xl px-5 py-4 focus:outline-none focus:border-wine transition-colors text-zinc-900 font-medium"
-                    placeholder="Trường học / Doanh nghiệp"
+                    type="tel" 
+                    className="w-full bg-zinc-100 px-6 py-4 rounded-2xl border-none focus:ring-2 focus:ring-wine/20 outline-none transition-all text-zinc-900 placeholder:text-zinc-400" 
+                    placeholder="090..." 
                   />
                 </div>
               </div>
-              <div>
-                <label className="block text-sm font-bold text-zinc-500 mb-3 uppercase tracking-wider">Dòng robot quan tâm</label>
-                <select className="w-full bg-zinc-50 border border-zinc-200 rounded-2xl px-5 py-4 focus:outline-none focus:border-wine transition-colors appearance-none text-zinc-900 font-medium">
-                  <option className="bg-white">Unitree H1 (Humanoid)</option>
-                  <option className="bg-white">Unitree G1 (Compact)</option>
-                  <option className="bg-white">Unitree Go2 (Quadruped)</option>
-                  <option className="bg-white">Giải pháp AI tùy chỉnh</option>
-                </select>
+              
+              <div className="space-y-3">
+                <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em]">Dịch vụ quan tâm</label>
+                <div className="relative">
+                  <select className="w-full bg-zinc-100 px-6 py-4 rounded-2xl border-none focus:ring-2 focus:ring-wine/20 outline-none transition-all text-zinc-900 appearance-none cursor-pointer">
+                    <option className="bg-white">Mua Robot Humanoid</option>
+                    <option className="bg-white">Thuê Robot sự kiện</option>
+                    <option className="bg-white">Giải pháp giáo dục</option>
+                  </select>
+                  <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-400">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                  </div>
+                </div>
               </div>
-              <div>
-                <label className="block text-sm font-bold text-zinc-500 mb-3 uppercase tracking-wider">Lời nhắn</label>
+              
+              <div className="space-y-3">
+                <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em]">Lời nhắn</label>
                 <textarea 
-                  rows={4}
-                  className="w-full bg-zinc-50 border border-zinc-200 rounded-2xl px-5 py-4 focus:outline-none focus:border-wine transition-colors text-zinc-900 font-medium"
+                  className="w-full bg-zinc-100 px-6 py-4 rounded-2xl border-none focus:ring-2 focus:ring-wine/20 outline-none transition-all text-zinc-900 h-32 resize-none placeholder:text-zinc-400" 
                   placeholder="Tôi muốn tìm hiểu về..."
-                />
+                ></textarea>
               </div>
-              <button className="w-full py-5 bg-wine hover:bg-wine-dark text-white rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-3 shadow-xl shadow-wine/20">
-                Gửi yêu cầu
-                <Send className="w-6 h-6" />
-              </button>
+              
+              <div className="pt-4">
+                <button className="w-full py-5 bg-[#8B1D22] hover:bg-[#72181C] text-white rounded-full font-bold text-lg transition-all shadow-xl shadow-wine/30 active:scale-[0.98]">
+                  Gửi yêu cầu ngay
+                </button>
+              </div>
             </form>
           </div>
         </div>

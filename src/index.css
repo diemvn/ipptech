@@ -33,12 +33,64 @@
   }
 }
 
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes corner-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes scroll-ring-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 .glass-card {
   @apply bg-white border border-zinc-200 shadow-sm rounded-2xl overflow-hidden;
 }
 
 .glass-card-hover {
   @apply hover:shadow-xl hover:shadow-zinc-200/50 transition-all duration-300;
+}
+
+.card-glass {
+  @apply bg-white border border-zinc-200 shadow-sm rounded-[32px] p-10 transition-all duration-500 hover:shadow-2xl hover:shadow-zinc-200/50;
+}
+
+.section-padding {
+  @apply container mx-auto px-6;
+}
+
+.btn-primary {
+  @apply bg-wine hover:bg-wine-dark text-white rounded-2xl font-bold transition-all flex items-center justify-center gap-3 shadow-xl shadow-wine/20;
+}
+
+.btn-secondary {
+  @apply bg-white text-zinc-900 border border-zinc-200 hover:border-zinc-300 rounded-2xl font-bold px-8 py-4 transition-all shadow-sm;
+}
+
+.text-brand {
+  @apply text-wine;
+}
+
+.bg-brand {
+  @apply bg-wine;
+}
+
+.bg-light-bg {
+  @apply bg-zinc-50;
+}
+
+.bg-light-surface {
+  @apply bg-white;
 }
 
 .text-gradient {

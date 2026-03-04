@@ -1,23 +1,39 @@
+import { Facebook, Twitter, Linkedin, Youtube } from 'lucide-react';
+
 export default function Footer() {
+  const socialLinks = [
+    { icon: Facebook, label: 'Facebook' },
+    { icon: Twitter, label: 'Twitter' },
+    { icon: Linkedin, label: 'LinkedIn' },
+    { icon: Youtube, label: 'YouTube' },
+  ];
+
   return (
     <footer className="bg-white text-zinc-900 pt-32 pb-10 border-t border-zinc-100">
       <div className="section-padding grid md:grid-cols-4 gap-16 mb-20">
         <div className="col-span-2">
           <div className="flex items-center gap-3 mb-8">
-            <div className="w-10 h-10 bg-wine flex items-center justify-center rounded-xl text-white font-bold text-xl">
-              I
-            </div>
-            <span className="text-3xl font-bold tracking-tighter text-zinc-900">IPP<span className="text-wine">Tech</span></span>
+            <img 
+              src="https://ippgroup.vn/business/new%20logo/logo-08.jpg" 
+              alt="IPPTech Logo" 
+              className="h-14 w-auto object-contain"
+              referrerPolicy="no-referrer"
+            />
           </div>
           <p className="text-zinc-500 max-w-sm mb-10 text-lg leading-relaxed">
             Tiên phong trong lĩnh vực Humanoid Robot và AI tại Việt Nam. 
             Kiến tạo tương lai thông qua giáo dục và công nghệ.
           </p>
-          <div className="flex gap-6">
-            {['FB', 'TW', 'LI', 'YT'].map(social => (
-              <div key={social} className="w-12 h-12 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center hover:bg-wine hover:text-white hover:border-wine transition-all cursor-pointer font-bold text-xs text-zinc-600">
-                {social}
-              </div>
+          <div className="flex gap-4">
+            {socialLinks.map((social, i) => (
+              <a 
+                key={i} 
+                href="#" 
+                aria-label={social.label}
+                className="w-12 h-12 rounded-full bg-zinc-50 border border-zinc-100 flex items-center justify-center text-zinc-400 hover:bg-wine hover:text-white hover:border-wine hover:shadow-lg hover:shadow-wine/20 transition-all duration-300 cursor-pointer group"
+              >
+                <social.icon size={20} className="group-hover:scale-110 transition-transform" />
+              </a>
             ))}
           </div>
         </div>

@@ -18,7 +18,7 @@ const robotModels = [
     id: 'h2', 
     title: 'H2', 
     subtitle: 'Destiny Awakening',
-    specs: ['Chiều cao: 1.8m', 'Bậc tự do: 42', 'Cảm biến: LiDAR + Depth'],
+    specs: ['Chiều cao: 1.8m', 'Bậc tự do: 42', 'Cảm biến: Depth'],
     image: "https://www.unitree.com/images/f951770ea2e74197a6b0c089d13efc5a_800x800.png"
   },
   { 
@@ -55,6 +55,7 @@ const BG_IMAGE = "https://www.unitree.com/images/07f40a5254ec42c298d1a541db9d07e
 
 export default function RobotGrid() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -80,28 +81,56 @@ export default function RobotGrid() {
         }
       );
     }
+
+    if (titleRef.current) {
+      const text = titleRef.current.textContent || "";
+      titleRef.current.innerHTML = text
+        .split("")
+        .map((char) => `<span class="inline-block split-char">${char === " " ? "&nbsp;" : char}</span>`)
+        .join("");
+
+      const chars = titleRef.current.querySelectorAll(".split-char");
+
+      gsap.fromTo(chars,
+        {
+          y: 100,
+          opacity: 0,
+          rotateX: -90,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          rotateX: 0,
+          duration: 1,
+          stagger: 0.05,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: "top 90%",
+          }
+        }
+      );
+    }
   }, []);
 
   return (
-    <section className="w-full px-5 py-32 bg-white">
+    <section className="w-full px-5 py-32 bg-white overflow-hidden">
       {/* Section Header */}
       <div className="container mx-auto mb-20 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <p className="text-wine font-bold tracking-[0.3em] uppercase text-sm mb-4">
+        <div className="mb-4">
+          <p className="text-wine font-bold tracking-[0.3em] uppercase text-sm">
             02. PRODUCT SHOWCASE
           </p>
-          <h2 className="text-6xl md:text-8xl font-black text-zinc-900 tracking-tighter uppercase mb-8">
-            THE LINEUP
-          </h2>
-          <p className="text-xl md:text-2xl text-zinc-400 max-w-3xl mx-auto font-light">
-            Khám phá thế hệ Robot Humanoid tiếp theo. Click để xem chi tiết.
-          </p>
-        </motion.div>
+        </div>
+        <h2 
+          ref={titleRef}
+          className="text-6xl md:text-8xl font-black text-zinc-900 tracking-tighter uppercase mb-8 perspective-1000"
+        >
+          THE LINEUP
+        </h2>
+        <p className="text-xl md:text-2xl text-zinc-400 max-w-3xl mx-auto font-light">
+          Khám phá thế hệ Robot Humanoid tiếp theo. Click để xem chi tiết.
+        </p>
       </div>
 
       <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

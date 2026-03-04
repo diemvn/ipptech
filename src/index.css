@@ -69,6 +69,17 @@
   @apply container mx-auto px-6;
 }
 
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.tech-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+}
+
 .btn-primary {
   @apply bg-wine hover:bg-wine-dark text-white rounded-2xl font-bold transition-all flex items-center justify-center gap-3 shadow-xl shadow-wine/20;
 }

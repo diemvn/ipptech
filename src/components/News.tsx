@@ -1,6 +1,69 @@
+import { useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ChevronRight } from 'lucide-react';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function News() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (titleRef.current) {
+      const text = titleRef.current.textContent || "";
+      titleRef.current.innerHTML = text
+        .split("")
+        .map((char) => `<span class="inline-block split-char-news">${char === " " ? "&nbsp;" : char}</span>`)
+        .join("");
+
+      const chars = titleRef.current.querySelectorAll(".split-char-news");
+
+      gsap.fromTo(chars,
+        {
+          y: 40,
+          opacity: 0,
+          rotateX: -90,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          rotateX: 0,
+          duration: 0.8,
+          stagger: 0.03,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: "top 90%",
+          }
+        }
+      );
+    }
+
+    if (sectionRef.current) {
+      const cards = sectionRef.current.querySelectorAll('.news-card');
+      gsap.fromTo(cards,
+        {
+          y: 50,
+          opacity: 0,
+          scale: 0.95
+        },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 1,
+          stagger: 0.2,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          }
+        }
+      );
+    }
+  }, []);
+
   const articles = [
     { title: "Tương lai của Humanoid Robot tại Việt Nam 2026", date: "25 Feb, 2026", category: "Insights" },
     { title: "IPPTECH hợp tác cùng Đại học Bách Khoa xây dựng Lab AI", date: "20 Feb, 2026", category: "Events" },
@@ -8,19 +71,19 @@ export default function News() {
   ];
 
   return (
-    <section id="news" className="py-24 bg-light">
+    <section id="news" ref={sectionRef} className="py-24 bg-light overflow-hidden">
       <div className="section-padding">
         <div className="flex items-end justify-between mb-12">
           <div>
             <h2 className="text-sm font-bold text-brand uppercase tracking-widest mb-4">04. News & Insights</h2>
-            <h3 className="text-4xl font-bold text-black">BÁO CHÍ & SỰ KIỆN</h3>
+            <h3 ref={titleRef} className="text-4xl font-bold text-black perspective-1000">BÁO CHÍ & SỰ KIỆN</h3>
           </div>
           <button className="btn-secondary hidden md:block">Tất cả bài viết</button>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {articles.map((art, i) => (
-            <div key={i} className="group cursor-pointer">
+            <div key={i} className="group cursor-pointer news-card">
               <div className="aspect-video rounded-[24px] overflow-hidden mb-6 bg-black/5 border border-black/5">
                 <img 
                   src={`https://picsum.photos/seed/news${i}/600/400`} 

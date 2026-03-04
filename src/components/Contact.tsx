@@ -1,10 +1,45 @@
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Mail, Phone } from 'lucide-react';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function Contact() {
+  const formContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (formContainerRef.current) {
+      gsap.fromTo(formContainerRef.current,
+        {
+          scale: 0.85,
+          opacity: 0,
+          y: 60
+        },
+        {
+          scale: 1,
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: formContainerRef.current,
+            start: "top 90%",
+            end: "top 60%",
+            scrub: 1, // Smoothly link animation to scroll progress
+          }
+        }
+      );
+    }
+  }, []);
+
   return (
-    <section id="contact" className="bg-zinc-50 py-32">
+    <section id="contact" className="bg-zinc-50 py-32 overflow-hidden">
       <div className="section-padding">
-        <div className="bg-white rounded-[40px] overflow-hidden grid lg:grid-cols-2 shadow-2xl border border-zinc-100">
+        <div 
+          ref={formContainerRef}
+          className="bg-white rounded-[40px] overflow-hidden grid lg:grid-cols-2 shadow-2xl border border-zinc-100 origin-center"
+        >
           {/* Left Side - Info */}
           <div className="p-12 lg:p-20 bg-wine flex flex-col justify-center">
             <h3 className="text-4xl font-bold mb-6 text-white uppercase tracking-tight">

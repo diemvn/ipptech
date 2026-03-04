@@ -1,9 +1,15 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { GraduationCap, Cpu, Users, ArrowRight } from 'lucide-react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Solutions() {
   const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const orb1Ref = useRef<HTMLDivElement>(null);
+  const orb2Ref = useRef<HTMLDivElement>(null);
 
   const handleTilt = (e: React.MouseEvent<HTMLDivElement>, card: HTMLDivElement) => {
     const rect = card.getBoundingClientRect();
@@ -32,6 +38,81 @@ export default function Solutions() {
     });
   };
 
+  useEffect(() => {
+    // Animate Orbs
+    if (orb1Ref.current && orb2Ref.current) {
+      gsap.to(orb1Ref.current, {
+        x: '30vw',
+        y: '20vh',
+        duration: 15,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+      gsap.to(orb2Ref.current, {
+        x: '-20vw',
+        y: '-10vh',
+        duration: 20,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+    }
+
+    if (titleRef.current) {
+      const text = titleRef.current.textContent || "";
+      titleRef.current.innerHTML = text
+        .split("")
+        .map((char) => `<span class="inline-block split-char-sol">${char === " " ? "&nbsp;" : char}</span>`)
+        .join("");
+
+      const chars = titleRef.current.querySelectorAll(".split-char-sol");
+
+      gsap.fromTo(chars,
+        {
+          y: 50,
+          opacity: 0,
+          rotateX: -90,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          rotateX: 0,
+          duration: 0.8,
+          stagger: 0.03,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: "top 90%",
+          }
+        }
+      );
+    }
+
+    if (sectionRef.current) {
+      const cards = sectionRef.current.querySelectorAll('.solution-card');
+      gsap.fromTo(cards,
+        {
+          y: 60,
+          opacity: 0,
+          scale: 0.95
+        },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 1,
+          stagger: 0.2,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          }
+        }
+      );
+    }
+  }, []);
+
   const solutions = [
     { title: "Smart Education", desc: "Cách mạng hóa giáo dục với trợ giảng AI.", icon: GraduationCap },
     { title: "Enterprise AI", desc: "Tối ưu hóa vận hành doanh nghiệp.", icon: Cpu },
@@ -39,18 +120,30 @@ export default function Solutions() {
   ];
 
   return (
-    <section id="solutions" ref={sectionRef} className="py-32 bg-light-bg">
-      <div className="section-padding">
+    <section id="solutions" ref={sectionRef} className="relative py-32 bg-zinc-50 overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 z-0 opacity-40 tech-grid pointer-events-none" />
+      
+      <div 
+        ref={orb1Ref}
+        className="absolute -top-20 -left-20 w-[500px] h-[500px] bg-wine/5 rounded-full blur-[120px] z-0 pointer-events-none" 
+      />
+      <div 
+        ref={orb2Ref}
+        className="absolute -bottom-40 -right-20 w-[600px] h-[600px] bg-wine/10 rounded-full blur-[150px] z-0 pointer-events-none" 
+      />
+
+      <div className="relative z-10 section-padding">
         <div className="text-center mb-20">
           <h2 className="text-sm font-bold text-brand uppercase tracking-[0.3em] mb-4">03. Solutions</h2>
-          <h3 className="text-5xl font-bold text-black">ỨNG DỤNG THỰC TIỄN</h3>
+          <h3 ref={titleRef} className="text-5xl font-bold text-black perspective-1000">ỨNG DỤNG THỰC TIỄN</h3>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {solutions.map((sol, i) => (
             <div 
               key={i} 
-              className="card-glass group cursor-pointer"
+              className="card-glass group cursor-pointer solution-card"
               onMouseMove={(e) => handleTilt(e, e.currentTarget)}
               onMouseLeave={(e) => resetTilt(e.currentTarget)}
             >

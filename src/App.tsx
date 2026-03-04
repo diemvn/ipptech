@@ -40,13 +40,12 @@ export default function App() {
       <nav ref={navRef} className="fixed top-0 left-0 right-0 z-[90] bg-white/90 backdrop-blur-lg border-b border-zinc-100">
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-2 group cursor-pointer">
-            <div className="relative w-10 h-10 bg-wine rounded-lg flex items-center justify-center text-white font-black text-xl overflow-hidden">
-              <span className="relative z-10">I</span>
-              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            </div>
-            <span className="text-xl font-bold tracking-tighter text-zinc-900">
-              IPP<span className="text-wine group-hover:text-zinc-900 transition-colors duration-300">TECH</span>
-            </span>
+            <img 
+              src="https://ippgroup.vn/business/new%20logo/logo-08.jpg" 
+              alt="IPPTech Logo" 
+              className="h-9 w-auto object-contain"
+              referrerPolicy="no-referrer"
+            />
           </div>
           
           <div className="hidden md:flex items-center gap-2 text-sm font-medium">
